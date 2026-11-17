@@ -1,0 +1,17 @@
+# Blueprint de Render para el backend FastAPI (plan gratuito).
+# La base de datos vive en MongoDB Atlas: pega la cadena de conexión en MONGO_URI desde el panel de Render.
+services:
+  - type: web
+    name: balon-de-oro-api
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn backend.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /api/health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.13.5
+      - key: MONGO_URI
+        sync: false
+      - key: MONGO_DB
+        value: balon_de_oro

@@ -1,0 +1,288 @@
+{
+  "explainVersion": "1",
+  "queryPlanner": {
+    "namespace": "balon_de_oro.player_seasons",
+    "parsedQuery": {
+      "$and": [
+        {
+          "league.id": {
+            "$eq": "ES1"
+          }
+        },
+        {
+          "position": {
+            "$eq": "Attack"
+          }
+        },
+        {
+          "season": {
+            "$eq": 2025
+          }
+        },
+        {
+          "age": {
+            "$lte": 23
+          }
+        }
+      ]
+    },
+    "indexFilterSet": false,
+    "queryHash": "FC5B7489",
+    "planCacheShapeHash": "FC5B7489",
+    "planCacheKey": "1876C365",
+    "optimizationTimeMillis": 1,
+    "optimizationTimeMicros": 1287,
+    "maxIndexedOrSolutionsReached": false,
+    "maxIndexedAndSolutionsReached": false,
+    "maxScansToExplodeReached": false,
+    "prunedSimilarIndexes": false,
+    "winningPlan": {
+      "isCached": false,
+      "stage": "FETCH",
+      "nss": "balon_de_oro.player_seasons",
+      "inputStage": {
+        "stage": "IXSCAN",
+        "nss": "balon_de_oro.player_seasons",
+        "keyPattern": {
+          "season": 1,
+          "league.id": 1,
+          "position": 1,
+          "age": 1
+        },
+        "indexName": "season_league_position_age",
+        "isMultiKey": false,
+        "multiKeyPaths": {
+          "season": [],
+          "league.id": [],
+          "position": [],
+          "age": []
+        },
+        "isUnique": false,
+        "isSparse": false,
+        "isPartial": false,
+        "indexVersion": 2,
+        "direction": "forward",
+        "indexBounds": {
+          "season": [
+            "[2025, 2025]"
+          ],
+          "league.id": [
+            "[\"ES1\", \"ES1\"]"
+          ],
+          "position": [
+            "[\"Attack\", \"Attack\"]"
+          ],
+          "age": [
+            "[-inf, 23]"
+          ]
+        }
+      }
+    },
+    "rejectedPlans": [
+      {
+        "isCached": false,
+        "stage": "FETCH",
+        "filter": {
+          "$and": [
+            {
+              "age": {
+                "$lte": 23
+              }
+            },
+            {
+              "league.id": {
+                "$eq": "ES1"
+              }
+            },
+            {
+              "position": {
+                "$eq": "Attack"
+              }
+            }
+          ]
+        },
+        "nss": "balon_de_oro.player_seasons",
+        "inputStage": {
+          "stage": "IXSCAN",
+          "nss": "balon_de_oro.player_seasons",
+          "keyPattern": {
+            "season": 1,
+            "ml.probability": -1
+          },
+          "indexName": "season_ml_probability",
+          "isMultiKey": false,
+          "multiKeyPaths": {
+            "season": [],
+            "ml.probability": []
+          },
+          "isUnique": false,
+          "isSparse": false,
+          "isPartial": false,
+          "indexVersion": 2,
+          "direction": "forward",
+          "indexBounds": {
+            "season": [
+              "[2025, 2025]"
+            ],
+            "ml.probability": [
+              "[MaxKey, MinKey]"
+            ]
+          }
+        }
+      },
+      {
+        "isCached": false,
+        "stage": "FETCH",
+        "filter": {
+          "$and": [
+            {
+              "age": {
+                "$lte": 23
+              }
+            },
+            {
+              "league.id": {
+                "$eq": "ES1"
+              }
+            },
+            {
+              "position": {
+                "$eq": "Attack"
+              }
+            }
+          ]
+        },
+        "nss": "balon_de_oro.player_seasons",
+        "inputStage": {
+          "stage": "IXSCAN",
+          "nss": "balon_de_oro.player_seasons",
+          "keyPattern": {
+            "season": 1,
+            "club.id": 1
+          },
+          "indexName": "season_club",
+          "isMultiKey": false,
+          "multiKeyPaths": {
+            "season": [],
+            "club.id": []
+          },
+          "isUnique": false,
+          "isSparse": false,
+          "isPartial": false,
+          "indexVersion": 2,
+          "direction": "forward",
+          "indexBounds": {
+            "season": [
+              "[2025, 2025]"
+            ],
+            "club.id": [
+              "[MinKey, MaxKey]"
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "executionStats": {
+    "executionSuccess": true,
+    "nReturned": 13,
+    "executionTimeMillis": 1,
+    "executionTimeMicros": 1400,
+    "totalKeysExamined": 13,
+    "totalDocsExamined": 13,
+    "executionStages": {
+      "isCached": false,
+      "stage": "FETCH",
+      "nReturned": 13,
+      "executionTimeMillisEstimate": 0,
+      "works": 15,
+      "advanced": 13,
+      "needTime": 0,
+      "needYield": 0,
+      "saveState": 1,
+      "restoreState": 1,
+      "isEOF": 1,
+      "nss": "balon_de_oro.player_seasons",
+      "docsExamined": 13,
+      "alreadyHasObj": 0,
+      "inputStage": {
+        "stage": "IXSCAN",
+        "nReturned": 13,
+        "executionTimeMillisEstimate": 0,
+        "works": 14,
+        "advanced": 13,
+        "needTime": 0,
+        "needYield": 0,
+        "saveState": 1,
+        "restoreState": 1,
+        "isEOF": 1,
+        "nss": "balon_de_oro.player_seasons",
+        "keyPattern": {
+          "season": 1,
+          "league.id": 1,
+          "position": 1,
+          "age": 1
+        },
+        "indexName": "season_league_position_age",
+        "isMultiKey": false,
+        "multiKeyPaths": {
+          "season": [],
+          "league.id": [],
+          "position": [],
+          "age": []
+        },
+        "isUnique": false,
+        "isSparse": false,
+        "isPartial": false,
+        "indexVersion": 2,
+        "direction": "forward",
+        "indexBounds": {
+          "season": [
+            "[2025, 2025]"
+          ],
+          "league.id": [
+            "[\"ES1\", \"ES1\"]"
+          ],
+          "position": [
+            "[\"Attack\", \"Attack\"]"
+          ],
+          "age": [
+            "[-inf, 23]"
+          ]
+        },
+        "keysExamined": 13,
+        "seeks": 1,
+        "dupsTested": 0,
+        "dupsDropped": 0,
+        "peakTrackedMemBytes": 0
+      }
+    }
+  },
+  "queryShapeHash": "5BD922114866A3C74343D8287EBFA161894BA748095CCAAB457D89F366F0AA52",
+  "command": {
+    "find": "player_seasons",
+    "filter": {
+      "season": 2025,
+      "league.id": "ES1",
+      "position": "Attack",
+      "age": {
+        "$lte": 23
+      }
+    },
+    "$db": "balon_de_oro"
+  },
+  "serverInfo": {
+    "host": "Gefaell",
+    "port": 27017,
+    "version": "9.0.2",
+    "gitVersion": "c4d309807b94ac30edcca32e35e88a9598eadfc8"
+  },
+  "serverParameters": {
+    "internalQueryFacetMaxOutputDocSizeBytes": 104857600,
+    "internalLookupStageIntermediateDocumentMaxSizeBytes": 104857600,
+    "internalQueryProhibitBlockingMergeOnMongoS": 0,
+    "internalQueryFrameworkControl": "trySbeRestricted",
+    "internalQueryPlannerIgnoreIndexWithCollationForRegex": 1
+  },
+  "ok": 1.0
+}

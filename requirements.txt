@@ -1,0 +1,9 @@
+pymongo>=4.19
+pandas>=3.0
+numpy>=2.0
+pyarrow>=20
+scikit-learn==1.9.1
+joblib>=1.4
+fastapi>=0.160
+uvicorn>=0.54
+httpx>=0.28  # TestClient de tests/test_api.py

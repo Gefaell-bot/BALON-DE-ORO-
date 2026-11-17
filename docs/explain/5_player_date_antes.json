@@ -1,0 +1,152 @@
+{
+  "explainVersion": "1",
+  "stages": [
+    {
+      "$cursor": {
+        "queryPlanner": {
+          "namespace": "balon_de_oro.match_performances",
+          "parsedQuery": {
+            "meta.player_id": {
+              "$eq": 937958
+            }
+          },
+          "indexFilterSet": false,
+          "queryHash": "CC7709DB",
+          "planCacheShapeHash": "CC7709DB",
+          "planCacheKey": "6541ACE7",
+          "optimizationTimeMillis": 0,
+          "optimizationTimeMicros": 140,
+          "cursorType": "regular",
+          "maxIndexedOrSolutionsReached": false,
+          "maxIndexedAndSolutionsReached": false,
+          "maxScansToExplodeReached": false,
+          "prunedSimilarIndexes": false,
+          "winningPlan": {
+            "isCached": false,
+            "stage": "COLLSCAN",
+            "filter": {
+              "meta.player_id": {
+                "$eq": 937958
+              }
+            },
+            "nss": "balon_de_oro.match_performances",
+            "direction": "backward"
+          },
+          "rejectedPlans": []
+        },
+        "executionStats": {
+          "executionSuccess": true,
+          "nReturned": 37,
+          "executionTimeMillis": 72,
+          "executionTimeMicros": 72720,
+          "totalKeysExamined": 0,
+          "totalDocsExamined": 78836,
+          "executionStages": {
+            "isCached": false,
+            "stage": "COLLSCAN",
+            "filter": {
+              "meta.player_id": {
+                "$eq": 937958
+              }
+            },
+            "nReturned": 37,
+            "executionTimeMillisEstimate": 56,
+            "works": 78837,
+            "advanced": 37,
+            "needTime": 78799,
+            "needYield": 0,
+            "saveState": 7,
+            "restoreState": 6,
+            "isEOF": 1,
+            "nss": "balon_de_oro.match_performances",
+            "direction": "backward",
+            "docsExamined": 78836,
+            "seeks": 0
+          }
+        }
+      },
+      "nReturned": 37,
+      "executionTimeMillisEstimate": 67
+    },
+    {
+      "$match": {
+        "$expr": {
+          "$lte": [
+            {
+              "$subtract": [
+                "$control.max.date",
+                "$control.min.date"
+              ]
+            },
+            {
+              "$const": 2592000000
+            }
+          ]
+        }
+      },
+      "nReturned": 37,
+      "executionTimeMillisEstimate": 67,
+      "expressionEvaluationPeakMemoryBytes": 0
+    },
+    {
+      "$_internalUnpackBucket": {
+        "exclude": [],
+        "timeField": "date",
+        "metaField": "meta",
+        "bucketMaxSpanSeconds": 2592000,
+        "assumeNoMixedSchemaData": true,
+        "includeMinTimeAsMetadata": true,
+        "sbeCompatible": false
+      },
+      "nReturned": 103,
+      "executionTimeMillisEstimate": 67
+    },
+    {
+      "$_internalBoundedSort": {
+        "sortKey": {
+          "date": -1
+        },
+        "bound": {
+          "base": "min",
+          "offsetSeconds": 2592000
+        },
+        "limit": 0
+      },
+      "totalDataSizeSortedBytesEstimate": 162514,
+      "usedDisk": false,
+      "spills": 0,
+      "spilledBytes": 0,
+      "spilledRecords": 0,
+      "spilledDataStorageSize": 0,
+      "nReturned": 103,
+      "executionTimeMillisEstimate": 67,
+      "peakTrackedMemBytes": 17355
+    }
+  ],
+  "queryShapeHash": "BB79EEBCACE85F24B5B055A0B360A45F040A4FB58BFD8FB0EBCCC0497817305A",
+  "peakTrackedMemBytes": 17355,
+  "serverInfo": {
+    "host": "Gefaell",
+    "port": 27017,
+    "version": "9.0.2",
+    "gitVersion": "c4d309807b94ac30edcca32e35e88a9598eadfc8"
+  },
+  "serverParameters": {
+    "internalQueryFacetMaxOutputDocSizeBytes": 104857600,
+    "internalLookupStageIntermediateDocumentMaxSizeBytes": 104857600,
+    "internalQueryProhibitBlockingMergeOnMongoS": 0,
+    "internalQueryFrameworkControl": "trySbeRestricted",
+    "internalQueryPlannerIgnoreIndexWithCollationForRegex": 1
+  },
+  "command": {
+    "find": "match_performances",
+    "filter": {
+      "meta.player_id": 937958
+    },
+    "sort": {
+      "date": -1
+    },
+    "$db": "balon_de_oro"
+  },
+  "ok": 1.0
+}

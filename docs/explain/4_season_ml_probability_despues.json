@@ -1,0 +1,1295 @@
+{
+  "explainVersion": "1",
+  "stages": [
+    {
+      "$cursor": {
+        "queryPlanner": {
+          "namespace": "balon_de_oro.player_seasons",
+          "parsedQuery": {
+            "season": {
+              "$eq": 2025
+            }
+          },
+          "indexFilterSet": false,
+          "queryHash": "6DD4B0A5",
+          "planCacheShapeHash": "6DD4B0A5",
+          "planCacheKey": "1FB0091B",
+          "optimizationTimeMillis": 2,
+          "optimizationTimeMicros": 2811,
+          "cursorType": "regular",
+          "maxIndexedOrSolutionsReached": false,
+          "maxIndexedAndSolutionsReached": false,
+          "maxScansToExplodeReached": false,
+          "prunedSimilarIndexes": false,
+          "winningPlan": {
+            "isCached": false,
+            "stage": "PROJECTION_SIMPLE",
+            "transformBy": {
+              "age": 1,
+              "ballon_dor_rank": 1,
+              "bdo": 1,
+              "club": 1,
+              "image_url": 1,
+              "league": 1,
+              "market_value_eur": 1,
+              "ml": 1,
+              "name": 1,
+              "nationality": 1,
+              "performance": 1,
+              "player_id": 1,
+              "position": 1,
+              "season": 1,
+              "sub_position": 1,
+              "title_points": 1,
+              "titles": 1,
+              "ucl": 1,
+              "_id": 0
+            },
+            "inputStage": {
+              "stage": "FETCH",
+              "nss": "balon_de_oro.player_seasons",
+              "inputStage": {
+                "stage": "IXSCAN",
+                "nss": "balon_de_oro.player_seasons",
+                "keyPattern": {
+                  "season": 1,
+                  "ml.probability": -1
+                },
+                "indexName": "season_ml_probability",
+                "isMultiKey": false,
+                "multiKeyPaths": {
+                  "season": [],
+                  "ml.probability": []
+                },
+                "isUnique": false,
+                "isSparse": false,
+                "isPartial": false,
+                "indexVersion": 2,
+                "direction": "forward",
+                "indexBounds": {
+                  "season": [
+                    "[2025, 2025]"
+                  ],
+                  "ml.probability": [
+                    "[MaxKey, MinKey]"
+                  ]
+                }
+              }
+            }
+          },
+          "rejectedPlans": [
+            {
+              "isCached": false,
+              "stage": "SORT",
+              "sortPattern": {
+                "ml.probability": -1
+              },
+              "memLimit": 104857600,
+              "type": "simple",
+              "inputStage": {
+                "stage": "PROJECTION_SIMPLE",
+                "transformBy": {
+                  "age": 1,
+                  "ballon_dor_rank": 1,
+                  "bdo": 1,
+                  "club": 1,
+                  "image_url": 1,
+                  "league": 1,
+                  "market_value_eur": 1,
+                  "ml": 1,
+                  "name": 1,
+                  "nationality": 1,
+                  "performance": 1,
+                  "player_id": 1,
+                  "position": 1,
+                  "season": 1,
+                  "sub_position": 1,
+                  "title_points": 1,
+                  "titles": 1,
+                  "ucl": 1,
+                  "_id": 0
+                },
+                "inputStage": {
+                  "stage": "FETCH",
+                  "nss": "balon_de_oro.player_seasons",
+                  "inputStage": {
+                    "stage": "IXSCAN",
+                    "nss": "balon_de_oro.player_seasons",
+                    "keyPattern": {
+                      "season": 1,
+                      "league.id": 1,
+                      "position": 1,
+                      "age": 1
+                    },
+                    "indexName": "season_league_position_age",
+                    "isMultiKey": false,
+                    "multiKeyPaths": {
+                      "season": [],
+                      "league.id": [],
+                      "position": [],
+                      "age": []
+                    },
+                    "isUnique": false,
+                    "isSparse": false,
+                    "isPartial": false,
+                    "indexVersion": 2,
+                    "direction": "forward",
+                    "indexBounds": {
+                      "season": [
+                        "[2025, 2025]"
+                      ],
+                      "league.id": [
+                        "[MinKey, MaxKey]"
+                      ],
+                      "position": [
+                        "[MinKey, MaxKey]"
+                      ],
+                      "age": [
+                        "[MinKey, MaxKey]"
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "isCached": false,
+              "stage": "SORT",
+              "sortPattern": {
+                "ml.probability": -1
+              },
+              "memLimit": 104857600,
+              "type": "simple",
+              "inputStage": {
+                "stage": "PROJECTION_SIMPLE",
+                "transformBy": {
+                  "age": 1,
+                  "ballon_dor_rank": 1,
+                  "bdo": 1,
+                  "club": 1,
+                  "image_url": 1,
+                  "league": 1,
+                  "market_value_eur": 1,
+                  "ml": 1,
+                  "name": 1,
+                  "nationality": 1,
+                  "performance": 1,
+                  "player_id": 1,
+                  "position": 1,
+                  "season": 1,
+                  "sub_position": 1,
+                  "title_points": 1,
+                  "titles": 1,
+                  "ucl": 1,
+                  "_id": 0
+                },
+                "inputStage": {
+                  "stage": "FETCH",
+                  "nss": "balon_de_oro.player_seasons",
+                  "inputStage": {
+                    "stage": "IXSCAN",
+                    "nss": "balon_de_oro.player_seasons",
+                    "keyPattern": {
+                      "season": 1,
+                      "club.id": 1
+                    },
+                    "indexName": "season_club",
+                    "isMultiKey": false,
+                    "multiKeyPaths": {
+                      "season": [],
+                      "club.id": []
+                    },
+                    "isUnique": false,
+                    "isSparse": false,
+                    "isPartial": false,
+                    "indexVersion": 2,
+                    "direction": "forward",
+                    "indexBounds": {
+                      "season": [
+                        "[2025, 2025]"
+                      ],
+                      "club.id": [
+                        "[MinKey, MaxKey]"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "executionStats": {
+          "executionSuccess": true,
+          "nReturned": 3440,
+          "executionTimeMillis": 73,
+          "executionTimeMicros": 73191,
+          "totalKeysExamined": 3440,
+          "totalDocsExamined": 3440,
+          "executionStages": {
+            "isCached": false,
+            "stage": "PROJECTION_SIMPLE",
+            "nReturned": 3440,
+            "executionTimeMillisEstimate": 1,
+            "works": 3441,
+            "advanced": 3440,
+            "needTime": 0,
+            "needYield": 0,
+            "saveState": 10,
+            "restoreState": 9,
+            "isEOF": 1,
+            "transformBy": {
+              "age": 1,
+              "ballon_dor_rank": 1,
+              "bdo": 1,
+              "club": 1,
+              "image_url": 1,
+              "league": 1,
+              "market_value_eur": 1,
+              "ml": 1,
+              "name": 1,
+              "nationality": 1,
+              "performance": 1,
+              "player_id": 1,
+              "position": 1,
+              "season": 1,
+              "sub_position": 1,
+              "title_points": 1,
+              "titles": 1,
+              "ucl": 1,
+              "_id": 0
+            },
+            "inputStage": {
+              "stage": "FETCH",
+              "nReturned": 3440,
+              "executionTimeMillisEstimate": 0,
+              "works": 3441,
+              "advanced": 3440,
+              "needTime": 0,
+              "needYield": 0,
+              "saveState": 10,
+              "restoreState": 9,
+              "isEOF": 1,
+              "nss": "balon_de_oro.player_seasons",
+              "docsExamined": 3440,
+              "alreadyHasObj": 0,
+              "inputStage": {
+                "stage": "IXSCAN",
+                "nReturned": 3440,
+                "executionTimeMillisEstimate": 0,
+                "works": 3441,
+                "advanced": 3440,
+                "needTime": 0,
+                "needYield": 0,
+                "saveState": 10,
+                "restoreState": 9,
+                "isEOF": 1,
+                "nss": "balon_de_oro.player_seasons",
+                "keyPattern": {
+                  "season": 1,
+                  "ml.probability": -1
+                },
+                "indexName": "season_ml_probability",
+                "isMultiKey": false,
+                "multiKeyPaths": {
+                  "season": [],
+                  "ml.probability": []
+                },
+                "isUnique": false,
+                "isSparse": false,
+                "isPartial": false,
+                "indexVersion": 2,
+                "direction": "forward",
+                "indexBounds": {
+                  "season": [
+                    "[2025, 2025]"
+                  ],
+                  "ml.probability": [
+                    "[MaxKey, MinKey]"
+                  ]
+                },
+                "keysExamined": 3440,
+                "seeks": 1,
+                "dupsTested": 0,
+                "dupsDropped": 0,
+                "peakTrackedMemBytes": 0
+              }
+            }
+          }
+        }
+      },
+      "nReturned": 3440,
+      "executionTimeMillisEstimate": 25
+    },
+    {
+      "$addFields": {
+        "bdo": {
+          "components": {
+            "ga": {
+              "$divide": [
+                {
+                  "$ifNull": [
+                    "$performance.ga",
+                    {
+                      "$const": 0
+                    }
+                  ]
+                },
+                {
+                  "$const": 68
+                }
+              ]
+            },
+            "titles": {
+              "$divide": [
+                {
+                  "$ifNull": [
+                    "$title_points",
+                    {
+                      "$const": 0
+                    }
+                  ]
+                },
+                {
+                  "$const": 6.0
+                }
+              ]
+            },
+            "market": {
+              "$sqrt": [
+                {
+                  "$divide": [
+                    {
+                      "$ifNull": [
+                        "$market_value_eur",
+                        {
+                          "$const": 0
+                        }
+                      ]
+                    },
+                    {
+                      "$const": 200000000.0
+                    }
+                  ]
+                }
+              ]
+            },
+            "ucl": {
+              "$divide": [
+                {
+                  "$ifNull": [
+                    "$ucl.ga",
+                    {
+                      "$const": 0
+                    }
+                  ]
+                },
+                {
+                  "$const": 16
+                }
+              ]
+            },
+            "ga90": {
+              "$divide": [
+                {
+                  "$min": [
+                    "$performance.ga_per90",
+                    {
+                      "$const": 1.5
+                    }
+                  ]
+                },
+                {
+                  "$const": 1.5
+                }
+              ]
+            },
+            "win_rate": {
+              "$ifNull": [
+                "$performance.win_rate",
+                {
+                  "$const": 0
+                }
+              ]
+            }
+          }
+        }
+      },
+      "nReturned": 3440,
+      "executionTimeMillisEstimate": 28,
+      "expressionEvaluationPeakMemoryBytes": 0
+    },
+    {
+      "$addFields": {
+        "bdo": {
+          "score": {
+            "$round": [
+              {
+                "$multiply": [
+                  {
+                    "$const": 100
+                  },
+                  {
+                    "$add": [
+                      {
+                        "$multiply": [
+                          {
+                            "$const": 0.25
+                          },
+                          "$bdo.components.ga"
+                        ]
+                      },
+                      {
+                        "$multiply": [
+                          {
+                            "$const": 0.25
+                          },
+                          "$bdo.components.titles"
+                        ]
+                      },
+                      {
+                        "$multiply": [
+                          {
+                            "$const": 0.15
+                          },
+                          "$bdo.components.market"
+                        ]
+                      },
+                      {
+                        "$multiply": [
+                          {
+                            "$const": 0.15
+                          },
+                          "$bdo.components.ucl"
+                        ]
+                      },
+                      {
+                        "$multiply": [
+                          {
+                            "$const": 0.1
+                          },
+                          "$bdo.components.ga90"
+                        ]
+                      },
+                      {
+                        "$multiply": [
+                          {
+                            "$const": 0.1
+                          },
+                          "$bdo.components.win_rate"
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "$const": 1
+              }
+            ]
+          }
+        }
+      },
+      "nReturned": 3440,
+      "executionTimeMillisEstimate": 28,
+      "expressionEvaluationPeakMemoryBytes": 0
+    },
+    {
+      "$addFields": {
+        "bdo": {
+          "tier": {
+            "$switch": {
+              "branches": [
+                {
+                  "case": {
+                    "$gte": [
+                      "$bdo.score",
+                      {
+                        "$const": 55
+                      }
+                    ]
+                  },
+                  "then": {
+                    "$const": "Favoritos"
+                  }
+                },
+                {
+                  "case": {
+                    "$gte": [
+                      "$bdo.score",
+                      {
+                        "$const": 40
+                      }
+                    ]
+                  },
+                  "then": {
+                    "$const": "Contendientes"
+                  }
+                },
+                {
+                  "case": {
+                    "$gte": [
+                      "$bdo.score",
+                      {
+                        "$const": 25
+                      }
+                    ]
+                  },
+                  "then": {
+                    "$const": "Aspirantes"
+                  }
+                }
+              ],
+              "default": {
+                "$const": "Resto"
+              }
+            }
+          }
+        }
+      },
+      "nReturned": 3440,
+      "executionTimeMillisEstimate": 38,
+      "expressionEvaluationPeakMemoryBytes": 0
+    },
+    {
+      "$facet": {
+        "leaderboard": [
+          {
+            "$internalFacetTeeConsumer": {},
+            "nReturned": 10,
+            "executionTimeMillisEstimate": 38
+          },
+          {
+            "$limit": 10,
+            "nReturned": 10,
+            "executionTimeMillisEstimate": 38
+          },
+          {
+            "$project": {
+              "player_id": true,
+              "season": true,
+              "name": true,
+              "image_url": true,
+              "age": true,
+              "nationality": true,
+              "position": true,
+              "sub_position": true,
+              "club": true,
+              "league": true,
+              "performance": true,
+              "ucl": true,
+              "titles": true,
+              "title_points": true,
+              "market_value_eur": true,
+              "ml": true,
+              "bdo": true,
+              "ballon_dor_rank": true,
+              "_id": false
+            },
+            "nReturned": 10,
+            "executionTimeMillisEstimate": 38,
+            "expressionEvaluationPeakMemoryBytes": 0
+          }
+        ],
+        "tiers": [
+          {
+            "$internalFacetTeeConsumer": {},
+            "nReturned": 3440,
+            "executionTimeMillisEstimate": 0
+          },
+          {
+            "$group": {
+              "_id": {
+                "$switch": {
+                  "branches": [
+                    {
+                      "case": {
+                        "$and": [
+                          {
+                            "$gte": [
+                              "$bdo.score",
+                              {
+                                "$const": 0
+                              }
+                            ]
+                          },
+                          {
+                            "$lt": [
+                              "$bdo.score",
+                              {
+                                "$const": 25
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      "then": {
+                        "$const": 0
+                      }
+                    },
+                    {
+                      "case": {
+                        "$and": [
+                          {
+                            "$gte": [
+                              "$bdo.score",
+                              {
+                                "$const": 25
+                              }
+                            ]
+                          },
+                          {
+                            "$lt": [
+                              "$bdo.score",
+                              {
+                                "$const": 40
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      "then": {
+                        "$const": 25
+                      }
+                    },
+                    {
+                      "case": {
+                        "$and": [
+                          {
+                            "$gte": [
+                              "$bdo.score",
+                              {
+                                "$const": 40
+                              }
+                            ]
+                          },
+                          {
+                            "$lt": [
+                              "$bdo.score",
+                              {
+                                "$const": 55
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      "then": {
+                        "$const": 40
+                      }
+                    },
+                    {
+                      "case": {
+                        "$and": [
+                          {
+                            "$gte": [
+                              "$bdo.score",
+                              {
+                                "$const": 55
+                              }
+                            ]
+                          },
+                          {
+                            "$lt": [
+                              "$bdo.score",
+                              {
+                                "$const": 100.1
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      "then": {
+                        "$const": 55
+                      }
+                    }
+                  ],
+                  "default": {
+                    "$const": "sin_puntuar"
+                  }
+                }
+              },
+              "count": {
+                "$sum": {
+                  "$const": 1
+                }
+              },
+              "avg_age": {
+                "$avg": "$age"
+              },
+              "top": {
+                "$topN": {
+                  "n": {
+                    "$const": 5
+                  },
+                  "output": {
+                    "player_id": "$player_id",
+                    "name": "$name",
+                    "score": "$bdo.score"
+                  },
+                  "sortBy": {
+                    "bdo.score": -1
+                  }
+                }
+              },
+              "$willBeMerged": false
+            },
+            "nReturned": 4,
+            "executionTimeMillisEstimate": 11,
+            "maxAccumulatorMemoryUsageBytes": {
+              "count": 928,
+              "avg_age": 832,
+              "top": 9474
+            },
+            "totalOutputDataSizeBytes": 7495,
+            "usedDisk": false,
+            "spills": 0,
+            "spilledDataStorageSize": 0,
+            "spilledBytes": 0,
+            "spilledRecords": 0,
+            "peakTrackedMemBytes": 11298
+          },
+          {
+            "$sort": {
+              "sortKey": {
+                "_id": 1
+              }
+            },
+            "totalDataSizeSortedBytesEstimate": 7527,
+            "usedDisk": false,
+            "spills": 0,
+            "spilledBytes": 0,
+            "spilledRecords": 0,
+            "spilledDataStorageSize": 0,
+            "nReturned": 4,
+            "executionTimeMillisEstimate": 11,
+            "peakTrackedMemBytes": 7527
+          }
+        ],
+        "promesas": [
+          {
+            "$internalFacetTeeConsumer": {},
+            "nReturned": 3440,
+            "executionTimeMillisEstimate": 0
+          },
+          {
+            "$match": {
+              "age": {
+                "$lte": 21
+              }
+            },
+            "nReturned": 141,
+            "executionTimeMillisEstimate": 0,
+            "expressionEvaluationPeakMemoryBytes": 512
+          },
+          {
+            "$sort": {
+              "sortKey": {
+                "bdo.score": -1
+              },
+              "limit": 6
+            },
+            "totalDataSizeSortedBytesEstimate": 17831,
+            "usedDisk": false,
+            "spills": 0,
+            "spilledBytes": 0,
+            "spilledRecords": 0,
+            "spilledDataStorageSize": 0,
+            "nReturned": 6,
+            "executionTimeMillisEstimate": 0,
+            "peakTrackedMemBytes": 17831
+          },
+          {
+            "$project": {
+              "player_id": true,
+              "name": true,
+              "age": true,
+              "club": true,
+              "image_url": true,
+              "bdo": {
+                "score": true
+              },
+              "ml": {
+                "probability": true
+              },
+              "performance": {
+                "ga": true
+              },
+              "_id": false
+            },
+            "nReturned": 6,
+            "executionTimeMillisEstimate": 0,
+            "expressionEvaluationPeakMemoryBytes": 0
+          }
+        ],
+        "market_bands": [
+          {
+            "$internalFacetTeeConsumer": {},
+            "nReturned": 3440,
+            "executionTimeMillisEstimate": 0
+          },
+          {
+            "$bucketAuto": {
+              "groupBy": "$market_value_eur",
+              "buckets": 5,
+              "output": {
+                "count": {
+                  "$sum": {
+                    "$const": 1
+                  }
+                },
+                "avg_score": {
+                  "$avg": "$bdo.score"
+                }
+              }
+            },
+            "nReturned": 5,
+            "executionTimeMillisEstimate": 10,
+            "usedDisk": false,
+            "spills": 0,
+            "spilledDataStorageSize": 0,
+            "spilledBytes": 0,
+            "spilledRecords": 0,
+            "peakTrackedMemBytes": 10243778,
+            "expressionEvaluationPeakMemoryBytes": 0
+          }
+        ],
+        "summary": [
+          {
+            "$internalFacetTeeConsumer": {},
+            "nReturned": 3440,
+            "executionTimeMillisEstimate": 1
+          },
+          {
+            "$group": {
+              "_id": {
+                "$const": null
+              },
+              "candidates": {
+                "$sum": {
+                  "$const": 1
+                }
+              },
+              "avg_score": {
+                "$avg": "$bdo.score"
+              },
+              "goals": {
+                "$sum": "$performance.goals"
+              },
+              "assists": {
+                "$sum": "$performance.assists"
+              },
+              "max_score": {
+                "$max": "$bdo.score"
+              },
+              "$willBeMerged": false
+            },
+            "nReturned": 1,
+            "executionTimeMillisEstimate": 10,
+            "maxAccumulatorMemoryUsageBytes": {
+              "candidates": 232,
+              "avg_score": 208,
+              "goals": 232,
+              "assists": 232,
+              "max_score": 176
+            },
+            "totalOutputDataSizeBytes": 365,
+            "usedDisk": false,
+            "spills": 0,
+            "spilledDataStorageSize": 0,
+            "spilledBytes": 0,
+            "spilledRecords": 0,
+            "peakTrackedMemBytes": 1096
+          },
+          {
+            "$project": {
+              "_id": false
+            },
+            "nReturned": 1,
+            "executionTimeMillisEstimate": 10,
+            "expressionEvaluationPeakMemoryBytes": 0
+          }
+        ]
+      },
+      "nReturned": 1,
+      "executionTimeMillisEstimate": 69
+    }
+  ],
+  "queryShapeHash": "495B2A4F9B7BD261BC43C3F380BA06F432CD250BDEC99D067472995B5B625ECE",
+  "peakTrackedMemBytes": 10450298,
+  "serverInfo": {
+    "host": "Gefaell",
+    "port": 27017,
+    "version": "9.0.2",
+    "gitVersion": "c4d309807b94ac30edcca32e35e88a9598eadfc8"
+  },
+  "serverParameters": {
+    "internalQueryFacetMaxOutputDocSizeBytes": 104857600,
+    "internalLookupStageIntermediateDocumentMaxSizeBytes": 104857600,
+    "internalQueryProhibitBlockingMergeOnMongoS": 0,
+    "internalQueryFrameworkControl": "trySbeRestricted",
+    "internalQueryPlannerIgnoreIndexWithCollationForRegex": 1
+  },
+  "command": {
+    "aggregate": "player_seasons",
+    "pipeline": [
+      {
+        "$match": {
+          "season": 2025
+        }
+      },
+      {
+        "$sort": {
+          "ml.probability": -1
+        }
+      },
+      {
+        "$addFields": {
+          "bdo.components": {
+            "ga": {
+              "$cond": [
+                {
+                  "$gt": [
+                    68,
+                    0
+                  ]
+                },
+                {
+                  "$divide": [
+                    {
+                      "$ifNull": [
+                        "$performance.ga",
+                        0
+                      ]
+                    },
+                    68
+                  ]
+                },
+                0
+              ]
+            },
+            "titles": {
+              "$cond": [
+                {
+                  "$gt": [
+                    6.0,
+                    0
+                  ]
+                },
+                {
+                  "$divide": [
+                    {
+                      "$ifNull": [
+                        "$title_points",
+                        0
+                      ]
+                    },
+                    6.0
+                  ]
+                },
+                0
+              ]
+            },
+            "market": {
+              "$sqrt": {
+                "$cond": [
+                  {
+                    "$gt": [
+                      200000000.0,
+                      0
+                    ]
+                  },
+                  {
+                    "$divide": [
+                      {
+                        "$ifNull": [
+                          "$market_value_eur",
+                          0
+                        ]
+                      },
+                      200000000.0
+                    ]
+                  },
+                  0
+                ]
+              }
+            },
+            "ucl": {
+              "$cond": [
+                {
+                  "$gt": [
+                    16,
+                    0
+                  ]
+                },
+                {
+                  "$divide": [
+                    {
+                      "$ifNull": [
+                        "$ucl.ga",
+                        0
+                      ]
+                    },
+                    16
+                  ]
+                },
+                0
+              ]
+            },
+            "ga90": {
+              "$divide": [
+                {
+                  "$min": [
+                    "$performance.ga_per90",
+                    1.5
+                  ]
+                },
+                1.5
+              ]
+            },
+            "win_rate": {
+              "$ifNull": [
+                "$performance.win_rate",
+                0
+              ]
+            }
+          }
+        }
+      },
+      {
+        "$addFields": {
+          "bdo.score": {
+            "$round": [
+              {
+                "$multiply": [
+                  100,
+                  {
+                    "$add": [
+                      {
+                        "$multiply": [
+                          0.25,
+                          "$bdo.components.ga"
+                        ]
+                      },
+                      {
+                        "$multiply": [
+                          0.25,
+                          "$bdo.components.titles"
+                        ]
+                      },
+                      {
+                        "$multiply": [
+                          0.15,
+                          "$bdo.components.market"
+                        ]
+                      },
+                      {
+                        "$multiply": [
+                          0.15,
+                          "$bdo.components.ucl"
+                        ]
+                      },
+                      {
+                        "$multiply": [
+                          0.1,
+                          "$bdo.components.ga90"
+                        ]
+                      },
+                      {
+                        "$multiply": [
+                          0.1,
+                          "$bdo.components.win_rate"
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              1
+            ]
+          }
+        }
+      },
+      {
+        "$addFields": {
+          "bdo.tier": {
+            "$switch": {
+              "branches": [
+                {
+                  "case": {
+                    "$gte": [
+                      "$bdo.score",
+                      55
+                    ]
+                  },
+                  "then": "Favoritos"
+                },
+                {
+                  "case": {
+                    "$gte": [
+                      "$bdo.score",
+                      40
+                    ]
+                  },
+                  "then": "Contendientes"
+                },
+                {
+                  "case": {
+                    "$gte": [
+                      "$bdo.score",
+                      25
+                    ]
+                  },
+                  "then": "Aspirantes"
+                }
+              ],
+              "default": "Resto"
+            }
+          }
+        }
+      },
+      {
+        "$facet": {
+          "leaderboard": [
+            {
+              "$limit": 10
+            },
+            {
+              "$project": {
+                "_id": 0,
+                "player_id": 1,
+                "season": 1,
+                "name": 1,
+                "image_url": 1,
+                "age": 1,
+                "nationality": 1,
+                "position": 1,
+                "sub_position": 1,
+                "club": 1,
+                "league": 1,
+                "performance": 1,
+                "ucl": 1,
+                "titles": 1,
+                "title_points": 1,
+                "market_value_eur": 1,
+                "ml": 1,
+                "bdo": 1,
+                "ballon_dor_rank": 1
+              }
+            }
+          ],
+          "tiers": [
+            {
+              "$bucket": {
+                "groupBy": "$bdo.score",
+                "boundaries": [
+                  0,
+                  25,
+                  40,
+                  55,
+                  100.1
+                ],
+                "default": "sin_puntuar",
+                "output": {
+                  "count": {
+                    "$sum": 1
+                  },
+                  "avg_age": {
+                    "$avg": "$age"
+                  },
+                  "top": {
+                    "$topN": {
+                      "n": 5,
+                      "sortBy": {
+                        "bdo.score": -1
+                      },
+                      "output": {
+                        "player_id": "$player_id",
+                        "name": "$name",
+                        "score": "$bdo.score"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ],
+          "promesas": [
+            {
+              "$match": {
+                "age": {
+                  "$lte": 21
+                }
+              }
+            },
+            {
+              "$sort": {
+                "bdo.score": -1
+              }
+            },
+            {
+              "$limit": 6
+            },
+            {
+              "$project": {
+                "_id": 0,
+                "player_id": 1,
+                "name": 1,
+                "age": 1,
+                "club": 1,
+                "image_url": 1,
+                "bdo.score": 1,
+                "ml.probability": 1,
+                "performance.ga": 1
+              }
+            }
+          ],
+          "market_bands": [
+            {
+              "$bucketAuto": {
+                "groupBy": "$market_value_eur",
+                "buckets": 5,
+                "output": {
+                  "count": {
+                    "$sum": 1
+                  },
+                  "avg_score": {
+                    "$avg": "$bdo.score"
+                  }
+                }
+              }
+            }
+          ],
+          "summary": [
+            {
+              "$group": {
+                "_id": null,
+                "candidates": {
+                  "$sum": 1
+                },
+                "avg_score": {
+                  "$avg": "$bdo.score"
+                },
+                "goals": {
+                  "$sum": "$performance.goals"
+                },
+                "assists": {
+                  "$sum": "$performance.assists"
+                },
+                "max_score": {
+                  "$max": "$bdo.score"
+                }
+              }
+            },
+            {
+              "$project": {
+                "_id": 0
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "cursor": {},
+    "$db": "balon_de_oro"
+  },
+  "ok": 1.0
+}

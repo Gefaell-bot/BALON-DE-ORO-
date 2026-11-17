@@ -1,0 +1,123 @@
+{
+  "explainVersion": "1",
+  "queryPlanner": {
+    "namespace": "balon_de_oro.player_seasons",
+    "parsedQuery": {
+      "market_value_eur": {
+        "$gte": 100000000
+      }
+    },
+    "indexFilterSet": false,
+    "queryHash": "B042199A",
+    "planCacheShapeHash": "B042199A",
+    "planCacheKey": "48EB4601",
+    "optimizationTimeMillis": 0,
+    "optimizationTimeMicros": 210,
+    "maxIndexedOrSolutionsReached": false,
+    "maxIndexedAndSolutionsReached": false,
+    "maxScansToExplodeReached": false,
+    "prunedSimilarIndexes": false,
+    "winningPlan": {
+      "isCached": false,
+      "stage": "SORT",
+      "sortPattern": {
+        "market_value_eur": -1
+      },
+      "memLimit": 104857600,
+      "type": "simple",
+      "inputStage": {
+        "stage": "COLLSCAN",
+        "filter": {
+          "market_value_eur": {
+            "$gte": 100000000
+          }
+        },
+        "nss": "balon_de_oro.player_seasons",
+        "direction": "forward"
+      }
+    },
+    "rejectedPlans": []
+  },
+  "executionStats": {
+    "executionSuccess": true,
+    "nReturned": 133,
+    "executionTimeMillis": 48,
+    "executionTimeMicros": 48175,
+    "totalKeysExamined": 0,
+    "totalDocsExamined": 47621,
+    "executionStages": {
+      "isCached": false,
+      "stage": "SORT",
+      "nReturned": 133,
+      "executionTimeMillisEstimate": 46,
+      "works": 47756,
+      "advanced": 133,
+      "needTime": 47622,
+      "needYield": 0,
+      "saveState": 2,
+      "restoreState": 2,
+      "isEOF": 1,
+      "sortPattern": {
+        "market_value_eur": -1
+      },
+      "memLimit": 104857600,
+      "type": "simple",
+      "totalDataSizeSorted": 168559,
+      "usedDisk": false,
+      "spills": 0,
+      "spilledRecords": 0,
+      "spilledBytes": 0,
+      "spilledDataStorageSize": 0,
+      "peakTrackedMemBytes": 168559,
+      "inputStage": {
+        "stage": "COLLSCAN",
+        "filter": {
+          "market_value_eur": {
+            "$gte": 100000000
+          }
+        },
+        "nReturned": 133,
+        "executionTimeMillisEstimate": 46,
+        "works": 47622,
+        "advanced": 133,
+        "needTime": 47488,
+        "needYield": 0,
+        "saveState": 2,
+        "restoreState": 2,
+        "isEOF": 1,
+        "nss": "balon_de_oro.player_seasons",
+        "direction": "forward",
+        "docsExamined": 47621,
+        "seeks": 0
+      }
+    }
+  },
+  "queryShapeHash": "105FD5EC5D3352AB1A4A73C35D23D589462CC60B86B65A86281E6B7D5AE454E8",
+  "peakTrackedMemBytes": 168559,
+  "command": {
+    "find": "player_seasons",
+    "filter": {
+      "market_value_eur": {
+        "$gte": 100000000
+      }
+    },
+    "sort": {
+      "market_value_eur": -1
+    },
+    "$db": "balon_de_oro"
+  },
+  "serverInfo": {
+    "host": "Gefaell",
+    "port": 27017,
+    "version": "9.0.2",
+    "gitVersion": "c4d309807b94ac30edcca32e35e88a9598eadfc8"
+  },
+  "serverParameters": {
+    "internalQueryFacetMaxOutputDocSizeBytes": 104857600,
+    "internalLookupStageIntermediateDocumentMaxSizeBytes": 104857600,
+    "internalQueryProhibitBlockingMergeOnMongoS": 0,
+    "internalQueryFrameworkControl": "trySbeRestricted",
+    "internalQueryPlannerIgnoreIndexWithCollationForRegex": 1
+  },
+  "ok": 1.0
+}

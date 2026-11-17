@@ -1,0 +1,129 @@
+{
+  "explainVersion": "1",
+  "queryPlanner": {
+    "namespace": "balon_de_oro.player_seasons",
+    "parsedQuery": {
+      "performance.goals": {
+        "$gte": 25
+      }
+    },
+    "indexFilterSet": false,
+    "queryHash": "25610EBC",
+    "planCacheShapeHash": "25610EBC",
+    "planCacheKey": "54A003FD",
+    "optimizationTimeMillis": 0,
+    "optimizationTimeMicros": 194,
+    "maxIndexedOrSolutionsReached": false,
+    "maxIndexedAndSolutionsReached": false,
+    "maxScansToExplodeReached": false,
+    "prunedSimilarIndexes": false,
+    "winningPlan": {
+      "isCached": false,
+      "stage": "SORT",
+      "sortPattern": {
+        "performance.goals": -1,
+        "performance.assists": -1
+      },
+      "memLimit": 104857600,
+      "limitAmount": 20,
+      "type": "simple",
+      "inputStage": {
+        "stage": "COLLSCAN",
+        "filter": {
+          "performance.goals": {
+            "$gte": 25
+          }
+        },
+        "nss": "balon_de_oro.player_seasons",
+        "direction": "forward"
+      }
+    },
+    "rejectedPlans": []
+  },
+  "executionStats": {
+    "executionSuccess": true,
+    "nReturned": 20,
+    "executionTimeMillis": 49,
+    "executionTimeMicros": 49527,
+    "totalKeysExamined": 0,
+    "totalDocsExamined": 47621,
+    "executionStages": {
+      "isCached": false,
+      "stage": "SORT",
+      "nReturned": 20,
+      "executionTimeMillisEstimate": 45,
+      "works": 47643,
+      "advanced": 20,
+      "needTime": 47622,
+      "needYield": 0,
+      "saveState": 2,
+      "restoreState": 2,
+      "isEOF": 1,
+      "sortPattern": {
+        "performance.goals": -1,
+        "performance.assists": -1
+      },
+      "memLimit": 104857600,
+      "limitAmount": 20,
+      "type": "simple",
+      "totalDataSizeSorted": 27331,
+      "usedDisk": false,
+      "spills": 0,
+      "spilledRecords": 0,
+      "spilledBytes": 0,
+      "spilledDataStorageSize": 0,
+      "peakTrackedMemBytes": 27801,
+      "inputStage": {
+        "stage": "COLLSCAN",
+        "filter": {
+          "performance.goals": {
+            "$gte": 25
+          }
+        },
+        "nReturned": 274,
+        "executionTimeMillisEstimate": 45,
+        "works": 47622,
+        "advanced": 274,
+        "needTime": 47347,
+        "needYield": 0,
+        "saveState": 2,
+        "restoreState": 2,
+        "isEOF": 1,
+        "nss": "balon_de_oro.player_seasons",
+        "direction": "forward",
+        "docsExamined": 47621,
+        "seeks": 0
+      }
+    }
+  },
+  "queryShapeHash": "2A6F8F72A2A8D30A0F54258C1BF2D38A402E23C5F280AB0E03F616316CD182BE",
+  "peakTrackedMemBytes": 27801,
+  "command": {
+    "find": "player_seasons",
+    "filter": {
+      "performance.goals": {
+        "$gte": 25
+      }
+    },
+    "sort": {
+      "performance.goals": -1,
+      "performance.assists": -1
+    },
+    "limit": 20,
+    "$db": "balon_de_oro"
+  },
+  "serverInfo": {
+    "host": "Gefaell",
+    "port": 27017,
+    "version": "9.0.2",
+    "gitVersion": "c4d309807b94ac30edcca32e35e88a9598eadfc8"
+  },
+  "serverParameters": {
+    "internalQueryFacetMaxOutputDocSizeBytes": 104857600,
+    "internalLookupStageIntermediateDocumentMaxSizeBytes": 104857600,
+    "internalQueryProhibitBlockingMergeOnMongoS": 0,
+    "internalQueryFrameworkControl": "trySbeRestricted",
+    "internalQueryPlannerIgnoreIndexWithCollationForRegex": 1
+  },
+  "ok": 1.0
+}

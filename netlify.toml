@@ -1,0 +1,31 @@
+# Netlify sirve solo el frontend estático. Las llamadas a /api las reenvía al backend
+# FastAPI alojado en Render, así el navegador no necesita CORS.
+# >>> Sustituye TU-BACKEND.onrender.com por la URL real de tu servicio en Render. <<<
+
+[build]
+  publish = "frontend"
+  command = ""
+
+[[redirects]]
+  from = "/api/*"
+  to = "https://TU-BACKEND.onrender.com/api/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/docs"
+  to = "https://TU-BACKEND.onrender.com/docs"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/openapi.json"
+  to = "https://TU-BACKEND.onrender.com/openapi.json"
+  status = 200
+  force = true
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"

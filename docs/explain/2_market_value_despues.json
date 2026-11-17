@@ -1,0 +1,136 @@
+{
+  "explainVersion": "1",
+  "queryPlanner": {
+    "namespace": "balon_de_oro.player_seasons",
+    "parsedQuery": {
+      "market_value_eur": {
+        "$gte": 100000000
+      }
+    },
+    "indexFilterSet": false,
+    "queryHash": "B042199A",
+    "planCacheShapeHash": "B042199A",
+    "planCacheKey": "9C4DB182",
+    "optimizationTimeMillis": 0,
+    "optimizationTimeMicros": 236,
+    "maxIndexedOrSolutionsReached": false,
+    "maxIndexedAndSolutionsReached": false,
+    "maxScansToExplodeReached": false,
+    "prunedSimilarIndexes": false,
+    "winningPlan": {
+      "isCached": false,
+      "stage": "FETCH",
+      "nss": "balon_de_oro.player_seasons",
+      "inputStage": {
+        "stage": "IXSCAN",
+        "nss": "balon_de_oro.player_seasons",
+        "keyPattern": {
+          "market_value_eur": -1
+        },
+        "indexName": "market_value",
+        "isMultiKey": false,
+        "multiKeyPaths": {
+          "market_value_eur": []
+        },
+        "isUnique": false,
+        "isSparse": false,
+        "isPartial": false,
+        "indexVersion": 2,
+        "direction": "forward",
+        "indexBounds": {
+          "market_value_eur": [
+            "[inf, 100000000]"
+          ]
+        }
+      }
+    },
+    "rejectedPlans": []
+  },
+  "executionStats": {
+    "executionSuccess": true,
+    "nReturned": 133,
+    "executionTimeMillis": 1,
+    "executionTimeMicros": 1260,
+    "totalKeysExamined": 133,
+    "totalDocsExamined": 133,
+    "executionStages": {
+      "isCached": false,
+      "stage": "FETCH",
+      "nReturned": 133,
+      "executionTimeMillisEstimate": 0,
+      "works": 134,
+      "advanced": 133,
+      "needTime": 0,
+      "needYield": 0,
+      "saveState": 0,
+      "restoreState": 0,
+      "isEOF": 1,
+      "nss": "balon_de_oro.player_seasons",
+      "docsExamined": 133,
+      "alreadyHasObj": 0,
+      "inputStage": {
+        "stage": "IXSCAN",
+        "nReturned": 133,
+        "executionTimeMillisEstimate": 0,
+        "works": 134,
+        "advanced": 133,
+        "needTime": 0,
+        "needYield": 0,
+        "saveState": 0,
+        "restoreState": 0,
+        "isEOF": 1,
+        "nss": "balon_de_oro.player_seasons",
+        "keyPattern": {
+          "market_value_eur": -1
+        },
+        "indexName": "market_value",
+        "isMultiKey": false,
+        "multiKeyPaths": {
+          "market_value_eur": []
+        },
+        "isUnique": false,
+        "isSparse": false,
+        "isPartial": false,
+        "indexVersion": 2,
+        "direction": "forward",
+        "indexBounds": {
+          "market_value_eur": [
+            "[inf, 100000000]"
+          ]
+        },
+        "keysExamined": 133,
+        "seeks": 1,
+        "dupsTested": 0,
+        "dupsDropped": 0,
+        "peakTrackedMemBytes": 0
+      }
+    }
+  },
+  "queryShapeHash": "105FD5EC5D3352AB1A4A73C35D23D589462CC60B86B65A86281E6B7D5AE454E8",
+  "command": {
+    "find": "player_seasons",
+    "filter": {
+      "market_value_eur": {
+        "$gte": 100000000
+      }
+    },
+    "sort": {
+      "market_value_eur": -1
+    },
+    "$db": "balon_de_oro"
+  },
+  "serverInfo": {
+    "host": "Gefaell",
+    "port": 27017,
+    "version": "9.0.2",
+    "gitVersion": "c4d309807b94ac30edcca32e35e88a9598eadfc8"
+  },
+  "serverParameters": {
+    "internalQueryFacetMaxOutputDocSizeBytes": 104857600,
+    "internalLookupStageIntermediateDocumentMaxSizeBytes": 104857600,
+    "internalQueryProhibitBlockingMergeOnMongoS": 0,
+    "internalQueryFrameworkControl": "trySbeRestricted",
+    "internalQueryPlannerIgnoreIndexWithCollationForRegex": 1
+  },
+  "ok": 1.0
+}

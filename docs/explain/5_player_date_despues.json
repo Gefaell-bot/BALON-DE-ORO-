@@ -1,0 +1,198 @@
+{
+  "explainVersion": "1",
+  "stages": [
+    {
+      "$cursor": {
+        "queryPlanner": {
+          "namespace": "balon_de_oro.match_performances",
+          "parsedQuery": {
+            "meta.player_id": {
+              "$eq": 937958
+            }
+          },
+          "indexFilterSet": false,
+          "queryHash": "CC7709DB",
+          "planCacheShapeHash": "CC7709DB",
+          "planCacheKey": "813CC4E3",
+          "optimizationTimeMillis": 0,
+          "optimizationTimeMicros": 190,
+          "cursorType": "regular",
+          "maxIndexedOrSolutionsReached": false,
+          "maxIndexedAndSolutionsReached": false,
+          "maxScansToExplodeReached": false,
+          "prunedSimilarIndexes": false,
+          "winningPlan": {
+            "isCached": false,
+            "stage": "FETCH",
+            "nss": "balon_de_oro.match_performances",
+            "inputStage": {
+              "stage": "IXSCAN",
+              "nss": "balon_de_oro.match_performances",
+              "keyPattern": {
+                "meta.player_id": 1,
+                "control.max.date": -1,
+                "control.min.date": -1
+              },
+              "indexName": "player_date",
+              "isMultiKey": false,
+              "multiKeyPaths": {
+                "meta.player_id": [],
+                "control.max.date": [],
+                "control.min.date": []
+              },
+              "isUnique": false,
+              "isSparse": false,
+              "isPartial": false,
+              "indexVersion": 2,
+              "direction": "forward",
+              "indexBounds": {
+                "meta.player_id": [
+                  "[937958, 937958]"
+                ],
+                "control.max.date": [
+                  "[MaxKey, MinKey]"
+                ],
+                "control.min.date": [
+                  "[MaxKey, MinKey]"
+                ]
+              }
+            }
+          },
+          "rejectedPlans": []
+        },
+        "executionStats": {
+          "executionSuccess": true,
+          "nReturned": 37,
+          "executionTimeMillis": 2,
+          "executionTimeMicros": 2895,
+          "totalKeysExamined": 37,
+          "totalDocsExamined": 37,
+          "executionStages": {
+            "isCached": false,
+            "stage": "FETCH",
+            "nReturned": 37,
+            "executionTimeMillisEstimate": 0,
+            "works": 38,
+            "advanced": 37,
+            "needTime": 0,
+            "needYield": 0,
+            "saveState": 3,
+            "restoreState": 2,
+            "isEOF": 1,
+            "nss": "balon_de_oro.match_performances",
+            "docsExamined": 37,
+            "alreadyHasObj": 0,
+            "inputStage": {
+              "stage": "IXSCAN",
+              "nReturned": 37,
+              "executionTimeMillisEstimate": 0,
+              "works": 38,
+              "advanced": 37,
+              "needTime": 0,
+              "needYield": 0,
+              "saveState": 3,
+              "restoreState": 2,
+              "isEOF": 1,
+              "nss": "balon_de_oro.match_performances",
+              "keyPattern": {
+                "meta.player_id": 1,
+                "control.max.date": -1,
+                "control.min.date": -1
+              },
+              "indexName": "player_date",
+              "isMultiKey": false,
+              "multiKeyPaths": {
+                "meta.player_id": [],
+                "control.max.date": [],
+                "control.min.date": []
+              },
+              "isUnique": false,
+              "isSparse": false,
+              "isPartial": false,
+              "indexVersion": 2,
+              "direction": "forward",
+              "indexBounds": {
+                "meta.player_id": [
+                  "[937958, 937958]"
+                ],
+                "control.max.date": [
+                  "[MaxKey, MinKey]"
+                ],
+                "control.min.date": [
+                  "[MaxKey, MinKey]"
+                ]
+              },
+              "keysExamined": 37,
+              "seeks": 1,
+              "dupsTested": 0,
+              "dupsDropped": 0,
+              "peakTrackedMemBytes": 0
+            }
+          }
+        }
+      },
+      "nReturned": 37,
+      "executionTimeMillisEstimate": 3
+    },
+    {
+      "$_internalUnpackBucket": {
+        "exclude": [],
+        "timeField": "date",
+        "metaField": "meta",
+        "bucketMaxSpanSeconds": 2592000,
+        "assumeNoMixedSchemaData": true,
+        "includeMaxTimeAsMetadata": true,
+        "sbeCompatible": false
+      },
+      "nReturned": 103,
+      "executionTimeMillisEstimate": 3
+    },
+    {
+      "$_internalBoundedSort": {
+        "sortKey": {
+          "date": -1
+        },
+        "bound": {
+          "base": "max",
+          "offsetSeconds": 0
+        },
+        "limit": 0
+      },
+      "totalDataSizeSortedBytesEstimate": 162514,
+      "usedDisk": false,
+      "spills": 0,
+      "spilledBytes": 0,
+      "spilledRecords": 0,
+      "spilledDataStorageSize": 0,
+      "nReturned": 103,
+      "executionTimeMillisEstimate": 3,
+      "peakTrackedMemBytes": 15778
+    }
+  ],
+  "queryShapeHash": "BB79EEBCACE85F24B5B055A0B360A45F040A4FB58BFD8FB0EBCCC0497817305A",
+  "peakTrackedMemBytes": 15778,
+  "serverInfo": {
+    "host": "Gefaell",
+    "port": 27017,
+    "version": "9.0.2",
+    "gitVersion": "c4d309807b94ac30edcca32e35e88a9598eadfc8"
+  },
+  "serverParameters": {
+    "internalQueryFacetMaxOutputDocSizeBytes": 104857600,
+    "internalLookupStageIntermediateDocumentMaxSizeBytes": 104857600,
+    "internalQueryProhibitBlockingMergeOnMongoS": 0,
+    "internalQueryFrameworkControl": "trySbeRestricted",
+    "internalQueryPlannerIgnoreIndexWithCollationForRegex": 1
+  },
+  "command": {
+    "find": "match_performances",
+    "filter": {
+      "meta.player_id": 937958
+    },
+    "sort": {
+      "date": -1
+    },
+    "$db": "balon_de_oro"
+  },
+  "ok": 1.0
+}

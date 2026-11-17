@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Balón de Oro Analytics</title>
+  <meta name="description" content="Quién opta a ganar el Balón de Oro: ranking ponderado, predicción y rendimiento partido a partido sobre datos de Transfermarkt.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#ranking">Saltar al ranking</a>
+
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="Balón de Oro Analytics, inicio">
+      <svg class="brand-ball" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="14"/><path d="M16 8l6 4.5-2.3 7h-7.4L10 12.5z"/><path d="M16 2v6M30 13l-8 -0.5M24.5 28l-4.8-8.5M7.5 28l4.8-8.5M2 13l8-0.5"/></svg>
+      <span>Balón de Oro <em>Analytics</em></span>
+    </a>
+    <nav class="topnav" aria-label="Secciones">
+      <a href="#ranking">Ranking</a>
+      <a href="#comparativa">Comparativa</a>
+      <a href="#registrar">Registrar partido</a>
+      <a href="#modelo">Modelo</a>
+    </nav>
+    <label class="season-pick">
+      <span class="sr-only">Temporada</span>
+      <select id="season" aria-label="Temporada evaluada"></select>
+    </label>
+  </header>
+
+  <main id="top">
+    <!-- HERO: podio de la gala -->
+    <section class="stage" aria-labelledby="stage-title">
+      <div class="stage-copy">
+        <h1 id="stage-title">¿Quién levanta el Balón de Oro <span id="stage-year">2026</span>?</h1>
+        <p id="stage-sub" class="lede">Candidatos ordenados por rendimiento, títulos, Champions y valor de mercado de la temporada.</p>
+      </div>
+      <ol class="podium" id="podium" aria-label="Podio actual">
+        <li class="medal skeleton"></li><li class="medal skeleton"></li><li class="medal skeleton"></li>
+      </ol>
+      <dl class="stage-facts" id="stage-facts"></dl>
+    </section>
+
+    <!-- FILTROS -->
+    <form class="filters glass" id="filters" aria-label="Filtros del ranking">
+      <label>Liga<select name="league" id="f-league"><option value="">Todas</option></select></label>
+      <label>Posición<select name="position" id="f-position"><option value="">Todas</option></select></label>
+      <label>Club<select name="club" id="f-club"><option value="">Todos</option></select></label>
+      <fieldset class="age">
+        <legend>Edad</legend>
+        <input type="number" name="age_min" id="f-age-min" min="15" max="45" placeholder="desde" aria-label="Edad mínima">
+        <span aria-hidden="true">–</span>
+        <input type="number" name="age_max" id="f-age-max" min="15" max="45" placeholder="hasta" aria-label="Edad máxima">
+      </fieldset>
+      <div class="seg" role="radiogroup" aria-label="Ordenar por">
+        <input type="radio" name="sort" id="sort-score" value="score" checked><label for="sort-score">Puntuación</label>
+        <input type="radio" name="sort" id="sort-ml" value="ml"><label for="sort-ml">Probabilidad</label>
+      </div>
+      <button type="reset" class="btn ghost">Limpiar filtros</button>
+    </form>
+
+    <!-- RANKING -->
+    <section id="ranking" class="block" aria-labelledby="ranking-title">
+      <div class="block-head">
+        <h2 id="ranking-title">Ranking de candidatos</h2>
+        <p class="hint" id="ranking-count"></p>
+        <div class="seg small" role="radiogroup" aria-label="Vista">
+          <input type="radio" name="view" id="view-table" value="table" checked><label for="view-table">Tabla</label>
+          <input type="radio" name="view" id="view-cards" value="cards"><label for="view-cards">Tarjetas</label>
+        </div>
+      </div>
+
+      <div class="ranking-layout">
+        <div class="glass ranking-main">
+          <div class="table-wrap" id="table-view">
+            <table class="rank-table">
+              <caption class="sr-only">Candidatos al Balón de Oro con sus estadísticas clave</caption>
+              <thead>
+                <tr>
+                  <th scope="col" class="num">#</th>
+                  <th scope="col">Jugador</th>
+                  <th scope="col" class="num" title="Goles">G</th>
+                  <th scope="col" class="num" title="Asistencias">A</th>
+                  <th scope="col" class="num hide-sm" title="Goles + asistencias por 90 minutos">G+A/90</th>
+                  <th scope="col" class="num hide-sm" title="Goles + asistencias en Champions">UCL</th>
+                  <th scope="col" class="hide-md">Títulos</th>
+                  <th scope="col" class="num hide-sm">Valor</th>
+                  <th scope="col" class="num">Prob.</th>
+                  <th scope="col" class="num">Puntos</th>
+                  <th scope="col" class="num"><span class="sr-only">Comparar</span><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></th>
+                </tr>
+              </thead>
+              <tbody id="rank-body"></tbody>
+            </table>
+          </div>
+          <div class="cards" id="cards-view" hidden></div>
+          <p class="empty" id="rank-empty" hidden>Ningún candidato cumple estos filtros. Amplía el rango de edad o quita la liga.</p>
+        </div>
+
+        <aside class="ranking-side">
+          <section class="glass tiers" aria-labelledby="tiers-title">
+            <h3 id="tiers-title">Categorías</h3>
+            <p class="hint">Agrupación por puntuación ($bucket).</p>
+            <ul id="tiers"></ul>
+          </section>
+          <section class="glass promesas" aria-labelledby="promesas-title">
+            <h3 id="promesas-title">Promesas sub-21</h3>
+            <ul id="promesas"></ul>
+          </section>
+        </aside>
+      </div>
+    </section>
+
+    <!-- COMPARATIVA -->
+    <section id="comparativa" class="block" aria-labelledby="compare-title">
+      <div class="block-head">
+        <h2 id="compare-title">Comparativa</h2>
+        <p class="hint">Por defecto, los cinco primeros. Marca hasta cinco en la tabla para cambiarlos.</p>
+      </div>
+      <div class="compare-grid">
+        <figure class="glass chart-card">
+          <figcaption>Perfil de la candidatura</figcaption>
+          <div class="chart-box"><canvas id="chart-radar" aria-label="Radar con los seis componentes de la puntuación" role="img"></canvas></div>
+        </figure>
+        <figure class="glass chart-card wide">
+          <figcaption>Goles + asistencias acumulados, mes a mes</figcaption>
+          <div class="chart-box"><canvas id="chart-line" aria-label="Evolución mensual de goles y asistencias acumulados" role="img"></canvas></div>
+        </figure>
+        <figure class="glass chart-card wide">
+          <figcaption>Números de la temporada</figcaption>
+          <div class="chart-box"><canvas id="chart-bars" aria-label="Goles, asistencias, G+A en Champions y puntos de títulos" role="img"></canvas></div>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ESCRITURA -->
+    <section id="registrar" class="block" aria-labelledby="write-title">
+      <div class="block-head">
+        <h2 id="write-title">Registrar un partido</h2>
+        <p class="hint">Se guarda en la colección de partidos y actualiza los totales, la puntuación y la probabilidad del jugador.</p>
+      </div>
+      <div class="write-grid">
+        <form class="glass form" id="match-form" novalidate>
+          <div class="field player-field">
+            <label for="m-player">Jugador</label>
+            <input id="m-player" type="search" autocomplete="off" placeholder="Escribe un nombre, p. ej. Yamal" required aria-describedby="m-player-pick">
+            <ul class="suggest" id="m-suggest" role="listbox" hidden></ul>
+            <p class="picked" id="m-player-pick" aria-live="polite"></p>
+          </div>
+          <div class="row">
+            <div class="field"><label for="m-date">Fecha</label><input id="m-date" type="date" required></div>
+            <div class="field"><label for="m-comp">Competición</label><select id="m-comp" required></select></div>
+          </div>
+          <div class="row four">
+            <div class="field"><label for="m-goals">Goles</label><input id="m-goals" type="number" min="0" max="10" value="0"></div>
+            <div class="field"><label for="m-assists">Asistencias</label><input id="m-assists" type="number" min="0" max="10" value="0"></div>
+            <div class="field"><label for="m-minutes">Minutos</label><input id="m-minutes" type="number" min="0" max="130" value="90"></div>
+            <div class="field"><label for="m-yellow">Amarillas</label><input id="m-yellow" type="number" min="0" max="2" value="0"></div>
+          </div>
+          <fieldset class="field">
+            <legend>Resultado de su equipo</legend>
+            <div class="seg" role="radiogroup">
+              <input type="radio" name="result" id="r-w" value="W" checked><label for="r-w">Victoria</label>
+              <input type="radio" name="result" id="r-d" value="D"><label for="r-d">Empate</label>
+              <input type="radio" name="result" id="r-l" value="L"><label for="r-l">Derrota</label>
+            </div>
+          </fieldset>
+          <p class="form-error" id="match-error" role="alert"></p>
+          <button class="btn gold" type="submit">Registrar partido</button>
+        </form>
+
+        <form class="glass form" id="stats-form" novalidate>
+          <h3>Actualizar valor o títulos</h3>
+          <p class="hint">Se aplica al jugador elegido arriba, en la temporada seleccionada.</p>
+          <div class="field"><label for="s-value">Valor de mercado (M€)</label><input id="s-value" type="number" min="0" max="500" step="1" placeholder="p. ej. 180"></div>
+          <div class="field"><label for="s-title">Añadir título</label>
+            <select id="s-title">
+              <option value="">Ninguno</option>
+              <option value="CL|Champions League|5">Champions League</option>
+              <option value="FIWC|Mundial|5">Mundial</option>
+              <option value="EURO|Eurocopa|4">Eurocopa</option>
+              <option value="COPA|Copa América|4">Copa América</option>
+              <option value="LEAGUE|Liga nacional|3">Liga nacional (top 5)</option>
+              <option value="CUP|Copa nacional|1">Copa nacional</option>
+              <option value="SUPER|Supercopa|0.5">Supercopa</option>
+            </select>
+          </div>
+          <p class="form-error" id="stats-error" role="alert"></p>
+          <button class="btn ghost" type="submit">Guardar cambios</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- MODELO -->
+    <section id="modelo" class="block" aria-labelledby="model-title">
+      <div class="block-head">
+        <h2 id="model-title">¿Acierta el modelo?</h2>
+        <p class="hint" id="model-sub"></p>
+      </div>
+      <div class="model-grid">
+        <dl class="glass model-metrics" id="model-metrics"></dl>
+        <div class="glass table-wrap">
+          <table class="history-table">
+            <caption class="sr-only">Podios reales del Balón de Oro y puesto que les dio el modelo sin haber visto esa temporada</caption>
+            <thead><tr><th scope="col">Gala</th><th scope="col">Ganador</th><th scope="col">2.º</th><th scope="col">3.º</th><th scope="col" class="num">Puesto del ganador en el modelo</th></tr></thead>
+            <tbody id="history-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <p>Datos: Global Football Data Lake (salimt/football-datasets) y Transfermarkt datasets (dcaribou). MongoDB, FastAPI y scikit-learn.</p>
+    <p><a href="/docs">Documentación de la API</a></p>
+  </footer>
+
+  <!-- FICHA DE JUGADOR -->
+  <dialog id="player-dialog" aria-labelledby="pd-name">
+    <div class="pd">
+      <button class="pd-close" id="pd-close" aria-label="Cerrar ficha"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+      <header class="pd-head">
+        <div class="portrait lg" id="pd-portrait"></div>
+        <div>
+          <h2 id="pd-name"></h2>
+          <p class="pd-meta" id="pd-meta"></p>
+          <p class="pd-badges" id="pd-badges"></p>
+        </div>
+        <div class="pd-score" id="pd-score"></div>
+      </header>
+      <div class="pd-body">
+        <section>
+          <h3>Desglose de la puntuación</h3>
+          <ul class="bars" id="pd-components"></ul>
+          <h3>Temporada</h3>
+          <dl class="kv" id="pd-stats"></dl>
+          <h3>Títulos</h3>
+          <ul class="chips" id="pd-titles"></ul>
+        </section>
+        <section>
+          <h3>Forma partido a partido</h3>
+          <div class="chart-box sm"><canvas id="pd-form" role="img" aria-label="Goles y asistencias acumulados y media de los últimos cinco partidos"></canvas></div>
+          <h3>Valor de mercado</h3>
+          <div class="chart-box sm"><canvas id="pd-value" role="img" aria-label="Histórico de valor de mercado"></canvas></div>
+          <h3>Últimos partidos</h3>
+          <div class="table-wrap"><table class="mini"><thead><tr><th scope="col">Fecha</th><th scope="col">Comp.</th><th scope="col" class="num">G</th><th scope="col" class="num">A</th><th scope="col" class="num">Min</th><th scope="col">Res.</th></tr></thead><tbody id="pd-matches"></tbody></table></div>
+        </section>
+      </div>
+    </div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
